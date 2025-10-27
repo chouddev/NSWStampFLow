@@ -1,0 +1,38 @@
+{
+  "name": "nsw-service-cypress-bdd",
+  "version": "1.0.0",
+  "description": "Cypress BDD framework for NSW Service motor vehicle stamp duty testing",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:headed": "cypress run --headed",
+    "test": "cypress run",
+    "test:headed": "cypress run --headed",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:edge": "cypress run --browser edge",
+    "test:stamp-duty": "cypress run --spec 'cypress/e2e/motor-vehicle-stamp-duty.cy.js'",
+    "clean": "rm -rf cypress/videos cypress/screenshots cypress/reports",
+    "report": "npx mochawesome-merge 'cypress/reports/.jsons/*.json' > cypress/reports/merged-report.json && npx marge cypress/reports/merged-report.json --reportDir cypress/reports --inline && open cypress/reports/merged-report.html",
+    "report:open": "open cypress/reports/merged-report.html"
+  },
+  "keywords": [
+    "cypress",
+    "bdd",
+    "testing",
+    "automation",
+    "nsw-service"
+  ],
+  "author": "Test Automation Engineer",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^13.15.0",
+    "cypress-mochawesome-reporter": "^3.7.0",
+    "mochawesome-merge": "^4.3.0",
+    "marge": "^1.0.1",
+    "mocha-junit-reporter": "^2.2.0"
+  }
+}

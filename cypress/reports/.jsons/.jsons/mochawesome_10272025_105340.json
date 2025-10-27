@@ -1,0 +1,110 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-26T23:53:33.039Z",
+    "end": "2025-10-26T23:53:40.424Z",
+    "duration": 7385,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9babd2a9-ecbc-45d4-8e86-8de76aa99b6f",
+      "title": "",
+      "fullFile": "cypress/e2e/motor-vehicle-stamp-duty.cy.js",
+      "file": "cypress/e2e/motor-vehicle-stamp-duty.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5509a499-fa6a-4dc6-8252-c35dcd0e169c",
+          "title": "NSW Motor Vehicle Stamp Duty Calculator",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should complete the motor vehicle stamp duty calculation flow",
+              "fullTitle": "NSW Motor Vehicle Stamp Duty Calculator should complete the motor vehicle stamp duty calculation flow",
+              "timedOut": null,
+              "duration": 7357,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1: Navigate to the motor vehicle stamp duty page\ncy.visit('/transaction/check-motor-vehicle-stamp-duty');\ncy.waitForPageLoad();\n// Verify we're on the correct page\ncy.url().should('include', 'check-motor-vehicle-stamp-duty');\ncy.get('body').should('be.visible');\n// Step 2: Click the \"Check online\" button\ncy.get('.cta__action > .button').should('be.visible').click();\n// Step 3: Verify redirect to calculator page\ncy.url().should('include', 'calculator');\ncy.get('body').should('be.visible');\n// Step 4: Wait for the form to load and select \"Yes\" for the vehicle question\ncy.get('[for=\"passenger_Y\"]').click();\n// Step 5: Enter a vehicle value of $25,000\ncy.get('input[type=\"number\"], #purchasePrice, input[name=\"purchasePrice\"]').first().clear().type('25000');\n// Step 6: Click the Calculate button\ncy.get('button:contains(\"Calculate\"), input[type=\"submit\"], .btn-primary').first().click();\n// Step 7: Verify calculation result appears\ncy.get('.alert').should('be.visible');\n// Step 8: Verify popup window appears with calculation details\ncy.get(':nth-child(3) > .right').should('be.visible').and('contain.text', '$25,000.00').and('contain.text', '$');\n// Take screenshot for verification\ncy.screenshot('motor-vehicle-stamp-duty-calculation-complete');",
+              "err": {},
+              "uuid": "5e6af1eb-a3d1-417d-b7c8-2f961222c428",
+              "parentUUID": "5509a499-fa6a-4dc6-8252-c35dcd0e169c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5e6af1eb-a3d1-417d-b7c8-2f961222c428"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7357,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/.jsons/.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveAllAttempts": false
+      },
+      "version": "6.3.0"
+    }
+  }
+}
