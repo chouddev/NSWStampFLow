@@ -8,7 +8,7 @@ describe('NSW Motor Vehicle Stamp Duty Calculator', () => {
     cy.waitForPageLoad()
   })
 
-  it('should complete the motor vehicle stamp duty calculation flow', () => {
+  it('shouldt complete the motor vehicle stamp duty calculation flow', () => {
     // Step 1: Navigate to the motor vehicle stamp duty page
     cy.visit('/transaction/check-motor-vehicle-stamp-duty')
     cy.waitForPageLoad()
