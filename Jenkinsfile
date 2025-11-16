@@ -1,6 +1,14 @@
 pipeline {
     agent any
     
+    triggers {
+        // Poll SCM every 5 minutes for new commits on the configured branch
+        pollSCM('H/5 * * * *')
+        // If you later configure GitHub webhooks and want push-based triggers instead,
+        // you can replace the line above with:
+        // githubPush()
+    }
+    
     environment {
         PATH = "/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:/opt/homebrew/opt/node@20/bin:${PATH}"
         NODE_VERSION = '20'

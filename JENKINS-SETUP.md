@@ -27,15 +27,32 @@ Go to **Manage Jenkins** → **Global Tool Configuration**:
 - `mochawesome-merge`
 - `marge`
 
-### 3. Create Pipeline Job
+### 3. Create Pipeline Job (with automatic trigger)
 
 1. **New Item** → **Pipeline**
 2. **Pipeline script from SCM**
-3. **Git** repository: `https://github.com/your-username/NSWStampDuty.git`
+3. **Git** repository: `https://github.com/your-username/NSWStampDuty.git` (or your Git server URL)
 4. **Script Path**: `Jenkinsfile`
 5. **Branch**: `*/main`
+6. Save the job.
 
-### 4. Test the Pipeline
+### 4. Enable automatic build trigger
+
+The `Jenkinsfile` already contains:
+
+```groovy
+triggers {
+    // Poll SCM every 5 minutes for new commits on the configured branch
+    pollSCM('H/5 * * * *')
+}
+```
+
+To make sure Jenkins obeys this:
+
+1. In the job configuration, under **Build Triggers**, you do **not** need to add extra triggers for SCM polling; the `Jenkinsfile` declarative `triggers` block handles it.
+2. Ensure that the Git repository URL and branch are correct in the **Pipeline script from SCM** section so Jenkins can detect new commits.
+
+### 5. Test the Pipeline
 
 1. Go to your Jenkins job dashboard
 2. Click **"Build Now"** to run the pipeline manually
@@ -43,12 +60,13 @@ Go to **Manage Jenkins** → **Global Tool Configuration**:
 
 ## What the Pipeline Does
 
-1. **Runs manually** when you click "Build Now"
-2. **Installs** dependencies with `npm ci`
-3. **Runs** the stamp duty tests
-4. **Generates** Mochawesome HTML reports
-5. **Archives** screenshots, videos, and reports
-6. **Publishes** HTML report to Jenkins dashboard
+1. **Runs automatically** when new commits are pushed to the configured branch (via SCM polling in the `Jenkinsfile`)
+2. **Can still be run manually** when you click "Build Now"
+3. **Installs** dependencies with `npm ci`
+4. **Runs** the stamp duty tests
+5. **Generates** Mochawesome HTML reports
+6. **Archives** screenshots, videos, and reports
+7. **Publishes** HTML report to Jenkins dashboard
 
 ## Viewing Results
 
@@ -57,4 +75,4 @@ After each build:
 - **Test Report**: Click "Cypress Test Report" for HTML report
 - **Artifacts**: Download screenshots/videos from build artifacts
 
-That's it! Your pipeline will now run automatically on every commit.
+That's it! Your pipeline will now run automatically on every commit (detected by Jenkins polling your Git repository).
